@@ -7,7 +7,7 @@ export default function LoginPage() {
 
   return (
     <>
-    <div className="flex min-h-screen items-center justify-center ">
+    <div className="flex min-h-screen items-center justify-center bg-amber-500 ">
 <div className="w-full max-w-md space-y-6 rounded-lg befor p-8 shadow-lg">
 {/* From generetiq */}
 

@@ -3,10 +3,31 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { loginAction } from "../_actions/authAction";
+import { useActionState, useEffect } from "react";
+import { toast } from "sonner";
 
 export const LoginForm = () => {
+
+
+const [state,action,pending]=useActionState(loginAction,false)
+
+
+useEffect(()=>{
+
+if (state.success) {
+  toast.success(state.message);
+} else {
+  toast.error(
+    state.message === "Invalid credentials"
+      ? "Email or Password is incorrect"
+      : state.message
+  );
+}
+},[state])
+
   return (
-    <form className="space-y-4">
+    <form action={action}   className="space-y-4">
       <Card className="p-4 space-y-4">
         <Input
           name="email"
@@ -23,6 +44,15 @@ export const LoginForm = () => {
         />
 
         <Button type="submit" className="w-full">
+
+{
+
+pending?"submitting........":"Login"
+
+}
+
+
+
           Login
         </Button>
       </Card>
