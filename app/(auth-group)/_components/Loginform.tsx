@@ -6,17 +6,20 @@ import { Input } from "@/components/ui/input";
 import { loginAction } from "../_actions/authAction";
 import { useActionState, useEffect } from "react";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+
 
 export const LoginForm = () => {
 
 
 const [state,action,pending]=useActionState(loginAction,false)
 
-
+const router=useRouter()
 useEffect(()=>{
 
 if (state.success) {
-  toast.success(state.message);
+  toast.success(state.message || "Login succesfull");
+  router.push("/dashboard")
 } else {
   toast.error(
     state.message === "Invalid credentials"
