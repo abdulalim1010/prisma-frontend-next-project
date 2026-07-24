@@ -75,7 +75,52 @@ const userSignOutItem = {
 
 
 
-export function Navbar() {
+
+
+
+
+
+
+
+type IUser = {
+  id: string;
+  name: string;
+  email: string;
+  role: "TENANT" | "LANDLORD" | "ADMIN";
+  status: "ACTIVE" | "INACTIVE" | "BLOCKED";
+  createdAt: string;
+  updatedAt: string;
+  profile: {
+    id: string;
+    photo: string;
+    bio: string;
+    phone: string;
+    address: string;
+    userId: string;
+    createdAt: string;
+    updatedAt: string;
+  };
+};
+
+
+type IUserResponse = {
+  success: boolean;
+  message: string;
+  data: IUser;
+};
+
+
+type NavbarProps = {
+  user: IUserResponse;
+}
+
+
+
+
+
+
+
+  export function Navbar({user}:NavbarProps ) {
   const pathname = usePathname()
 
   return (
@@ -170,11 +215,11 @@ export function Navbar() {
 
                 <div>
                   <p className="font-medium">
-                    Abdul Alim
+                   {user?.data?.name ?? "User"}
                   </p>
 
                   <p className="text-xs text-muted-foreground">
-                    alim@example.com
+                  {user?.data?.email ?? "User"}
                   </p>
                 </div>
 
