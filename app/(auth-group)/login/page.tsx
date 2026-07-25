@@ -1,4 +1,5 @@
-import { LoginForm } from "../_components/Loginform";
+import LoginForm from "../_components/Loginform";
+
 
 
 
