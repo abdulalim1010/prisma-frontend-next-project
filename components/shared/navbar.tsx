@@ -207,9 +207,22 @@ export function Navbar({ user }: NavbarProps) {
     </DropdownMenuContent>
   </DropdownMenu>
 ) : (
-  <Button asChild>
-    <Link href="/login">Login</Link>
-  </Button>
+  <div className="flex items-center gap-2">
+
+    <Button asChild variant="outline">
+      <Link href="/register">
+        Register
+      </Link>
+    </Button>
+
+
+    <Button asChild>
+      <Link href="/login">
+        Login
+      </Link>
+    </Button>
+
+  </div>
 )}
 
           {/* Mobile Menu */}

@@ -70,3 +70,48 @@ switch (decodedToken.role) {
   }
   return result;
 };
+
+
+type RegisterState = {
+  success: boolean;
+  message: string;
+};
+
+
+
+export const registerAction = async (
+  prevState: RegisterState,
+  formData: FormData
+) => {
+
+
+  const name = formData.get("name");
+  const email = formData.get("email");
+  const password = formData.get("password");
+  const role = formData.get("role");
+
+
+
+  const res = await fetch(
+    `${process.env.BACKEND_API_URL}/api/v1/auth/register`,
+    {
+      method:"POST",
+      headers:{
+        "content-type":"application/json"
+      },
+      body:JSON.stringify({
+        name,
+        email,
+        password,
+        role
+      })
+    }
+  );
+
+
+  const result = await res.json();
+
+
+  return result;
+
+};
