@@ -1,9 +1,11 @@
 const NewsPage=()=>{
-    return
-    <div>
+    return(
+         <div>
         NewsPage
 
 
     </div>
+    )
+   
 }
 export default NewsPage

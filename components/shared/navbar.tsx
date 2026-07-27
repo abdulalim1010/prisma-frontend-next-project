@@ -13,6 +13,7 @@ import {
   Heart,
   PlusCircle,
   LogOut,
+  NewspaperIcon,
 } from "lucide-react"
 
 import { cn } from "@/lib/utils"
@@ -30,6 +31,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { logout } from "@/service/logout"
 import { toast } from "sonner"
+import { PersonSimpleSwimIcon } from "@phosphor-icons/react/dist/ssr"
 
 // Adjust this import to wherever your actual logout logic lives
 // e.g. a server action, an API call, or next-auth's signOut
@@ -40,6 +42,8 @@ const navItems = [
   { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
   { label: "Properties", href: "/properties", icon: PlusCircle },
   { label: "Favorites", href: "/favorites", icon: Heart },
+  { label: "news", href: "/news", icon: NewspaperIcon },
+  { label: "premium", href: "/premium", icon: PersonSimpleSwimIcon },
 ]
 
 const userMenuItems = [
