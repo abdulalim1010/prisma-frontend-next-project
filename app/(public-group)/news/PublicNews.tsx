@@ -1,9 +1,11 @@
-export default async function PublicNews() {
-  // fetch public news
+const PublicNews = ({ news }: any) => {
+  console.log(news);
 
   return (
     <div>
-      Public News
+      {news?.map((item: any) => (
+        <h1 key={item.id}>{item.title}</h1>
+      ))}
     </div>
   );
-}
+};
