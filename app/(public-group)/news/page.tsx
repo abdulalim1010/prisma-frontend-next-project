@@ -1,6 +1,8 @@
 
 import { getPublicNews } from "@/service/news";
-import PublicNews from "./PremiumNews";
+import PublicNews from "./PublicNews";
+
+
 
 
 export default async function NewsPage() {

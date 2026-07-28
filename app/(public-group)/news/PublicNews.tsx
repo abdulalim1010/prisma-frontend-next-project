@@ -1,11 +1,14 @@
-const PublicNews = ({ news }: any) => {
-  console.log(news);
+import NewsCard from "./NewsCard";
 
+
+const PublicNews = ({ news }: any) => {
   return (
-    <div>
-      {news?.map((item: any) => (
-        <h1 key={item.id}>{item.title}</h1>
+    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {news.map((item: any) => (
+        <NewsCard key={item.id} news={item} />
       ))}
     </div>
   );
 };
+
+export default PublicNews;

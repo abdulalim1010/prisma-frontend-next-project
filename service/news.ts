@@ -9,3 +9,13 @@ export const getPublicNews = async () => {
 
   return res.json();
 };
+export const getPremiumNews = async () => {
+  const res = await fetch(
+    `${process.env.BACKEND_API_URL}/api/v1/news/premium`,
+    {
+      cache: "no-store",
+    }
+  );
+
+  return res.json();
+};

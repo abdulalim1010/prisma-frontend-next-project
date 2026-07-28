@@ -1,29 +1,31 @@
+
 import Link from "next/link";
 
-const NewsCard = ({ news }: any) => {
+const NewsCard = ({ news }: { news: any }) => {
   return (
-    <div className="rounded-lg border p-4 shadow-sm">
+    <div className="border rounded-xl overflow-hidden shadow">
+    <img
+  src={news.image}
+  alt={news.title}
+  className="w-full h-52 object-cover"
+/>
 
-      <img
-        src={news.image}
-        alt={news.title}
-        className="h-48 w-full rounded-md object-cover"
-      />
+      <div className="p-5">
+        <h2 className="font-bold text-xl">
+          {news.title}
+        </h2>
 
-      <h2 className="mt-4 text-xl font-bold">
-        {news.title}
-      </h2>
+        <p className="text-gray-500 mt-2">
+          {news.description}
+        </p>
 
-      <p className="mt-2 text-muted-foreground">
-        {news.description}
-      </p>
-
-      <Link
-        href={`/news/${news.id}`}
-        className="mt-4 inline-block text-blue-600"
-      >
-        Read More →
-      </Link>
+        <Link
+          href={`/news/${news.id}`}
+          className="text-blue-600 mt-3 inline-block"
+        >
+          Read More →
+        </Link>
+      </div>
     </div>
   );
 };
