@@ -43,7 +43,7 @@ const navItems = [
   { label: "Properties", href: "/properties", icon: PlusCircle },
   { label: "Favorites", href: "/favorites", icon: Heart },
   { label: "news", href: "/news", icon: NewspaperIcon },
-  { label: "premium", href: "/payment", icon: PersonSimpleSwimIcon },
+  { label: "premium", href: "/premium", icon: PersonSimpleSwimIcon },
 ]
 
 const userMenuItems = [

@@ -1,48 +1,24 @@
-"use client";
+import SubscribeButton from "../_components/SubscribeButton";
 
-import { Button } from "@/components/ui/button";
-
-const SubscribeButton = () => {
-
-  const handleSubscribe = async () => {
-    console.log("Subscribe clicked");
-
-    const url =
-      `${process.env.NEXT_PUBLIC_API_URL}/api/v1/payment/create-checkout-session`;
-
-    console.log("API URL:", url);
-
-    try {
-      const res = await fetch(url, {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      const data = await res.json();
-
-      console.log("Response:", data);
-
-      if (data.success) {
-        window.location.href = data.data.url;
-      }
-
-    } catch (error) {
-      console.log("FETCH ERROR:", error);
-    }
-  };
-
-
+export default function PaymentPage() {
   return (
-    <Button
-      onClick={handleSubscribe}
-    >
-      Subscribe Now ⭐
-    </Button>
+    <div className="container mx-auto flex min-h-[80vh] items-center justify-center px-4">
+      <div className="w-full max-w-md rounded-xl border p-8 shadow-lg text-center">
+
+        <h1 className="text-3xl font-bold">
+          Confirm Your Subscription
+        </h1>
+
+        <p className="mt-4 text-muted-foreground">
+          You will be redirected to Stripe's secure checkout page to complete
+          your payment.
+        </p>
+
+        <div className="mt-8">
+          <SubscribeButton />
+        </div>
+
+      </div>
+    </div>
   );
-};
-
-
-export default SubscribeButton;
+}

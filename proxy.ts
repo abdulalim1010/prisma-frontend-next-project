@@ -10,18 +10,29 @@ export function proxy(request: NextRequest) {
   const token = request.cookies.get("accessToken")?.value;
 
 
-  // Protected route
-  if (
-    pathname.startsWith("/dashboard") ||
-    pathname.startsWith("/tenant-dashboard") ||
-    pathname.startsWith("/admin-dashboard")
-  ) {
+  // Protected routes
+  const protectedRoutes = [
+    "/dashboard",
+    "/tenant-dashboard",
+    "/admin-dashboard",
+    "/premium",
+  ];
 
 
+  const isProtectedRoute = protectedRoutes.some((route) =>
+    pathname.startsWith(route)
+  );
+
+
+  if (isProtectedRoute) {
+
+    // No token
     if (!token) {
+
       return NextResponse.redirect(
         new URL("/login", request.url)
       );
+
     }
 
 
@@ -34,47 +45,62 @@ export function proxy(request: NextRequest) {
 
 
 
+    // Admin Dashboard
     if (
       pathname.startsWith("/admin-dashboard") &&
       role !== "ADMIN"
     ) {
+
       return NextResponse.redirect(
         new URL("/", request.url)
       );
+
     }
 
 
+
+    // Tenant Dashboard
     if (
       pathname.startsWith("/tenant-dashboard") &&
       role !== "TENANT"
     ) {
+
       return NextResponse.redirect(
         new URL("/", request.url)
       );
+
     }
 
 
+
+    // Landlord Dashboard
     if (
       pathname.startsWith("/dashboard") &&
       role !== "LANDLORD"
     ) {
+
       return NextResponse.redirect(
         new URL("/", request.url)
       );
+
     }
 
   }
 
 
   return NextResponse.next();
+
 }
 
 
 
 export const config = {
-  matcher:[
+
+  matcher: [
     "/dashboard/:path*",
     "/tenant-dashboard/:path*",
     "/admin-dashboard/:path*",
+    "/premium/:path*",
   ],
+
 };
