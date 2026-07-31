@@ -1,10 +1,19 @@
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { getMe } from "@/service/getMe";
+import { redirect } from "next/navigation";
+import SubscribeButton from "../_components/SubscribeButton";
 
-export default function PremiumPage() {
+
+export default async function PremiumPage() {
+  const result = await getMe();
+
+  const user = result.data;
+
+  if (user?.isPremium) {
+    redirect("/premium-news");
+  }
+
   return (
-    <div className="container mx-auto py-16">
-
+    <div>
       <h1 className="text-5xl font-bold text-center">
         Upgrade to Premium
       </h1>
@@ -14,16 +23,11 @@ export default function PremiumPage() {
       </p>
 
       <div className="max-w-md mx-auto mt-12 rounded-xl border p-8 shadow">
-
-        <h2 className="text-3xl font-bold">
-          Premium Plan
-        </h2>
+        <h2 className="text-3xl font-bold">Premium Plan</h2>
 
         <p className="text-5xl font-bold mt-6">
           $5
-          <span className="text-lg font-normal">
-            /month
-          </span>
+          <span className="text-lg font-normal">/month</span>
         </p>
 
         <ul className="space-y-3 mt-8">
@@ -33,17 +37,8 @@ export default function PremiumPage() {
           <li>✅ Future Premium Features</li>
         </ul>
 
-        <Button
-          asChild
-          className="w-full mt-8"
-        >
-          <Link href="/payment">
-            Continue
-          </Link>
-        </Button>
-
+        <SubscribeButton />
       </div>
-
     </div>
   );
 }
