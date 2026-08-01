@@ -19,6 +19,7 @@ import {
   Plus,
 } from "lucide-react";
 import NewsActions from "../../_components/news-actions";
+import Link from "next/link";
 
 
 export default async function NewsPage() {
@@ -46,10 +47,12 @@ export default async function NewsPage() {
         </div>
 
 
-        <Button>
-          <Plus className="mr-2 h-4 w-4"/>
-          Add News
-        </Button>
+       <Button asChild>
+  <Link href="/admin-dashboard/news/create">
+    <Plus className="mr-2 h-4 w-4" />
+    Add News
+  </Link>
+</Button>
 
 
       </div>

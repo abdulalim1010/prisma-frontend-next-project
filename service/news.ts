@@ -1,5 +1,6 @@
 import { cookies } from "next/headers";
 
+
 const API = process.env.BACKEND_API_URL;
 
 
@@ -71,3 +72,6 @@ export const getPremiumNews = async () => {
   return res.json();
 
 };
+//premium or not 
+
+

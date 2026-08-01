@@ -2,51 +2,38 @@
 
 import { Button } from "@/components/ui/button";
 
-const SubscribeButton = () => {
+export default function SubscribeButton(){
+
+const handleSubscribe = async()=>{
+
+const res = await fetch(
+"http://localhost:5000/api/v1/payment/create-checkout-session",
+{
+method:"POST",
+credentials:"include",
+}
+);
 
 
-  const handleSubscribe = async () => {
+const data = await res.json();
 
-    try {
-
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/payment/create-checkout-session`,
-        {
-          method: "POST",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+console.log(data);
 
 
-      const data = await res.json();
+if(res.ok){
 
+ window.location.href = data.url;
 
-      if(data.success){
+}
 
-        window.location.href = data.data.url;
-
-      }
-
-
-    } catch(error){
-
-      console.log(error);
-
-    }
-
-  };
-
-
-  return (
-    <Button onClick={handleSubscribe}>
-      Subscribe Now ⭐
-    </Button>
-  );
 
 };
 
 
-export default SubscribeButton;
+return(
+<Button onClick={handleSubscribe}>
+ Subscribe
+</Button>
+)
+
+}
