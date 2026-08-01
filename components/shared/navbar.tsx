@@ -39,17 +39,13 @@ import { PersonSimpleSwimIcon } from "@phosphor-icons/react/dist/ssr"
 
 const navItems = [
   { label: "Home", href: "/", icon: Home },
-  { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+
   { label: "Properties", href: "/properties", icon: PlusCircle },
   { label: "Favorites", href: "/favorites", icon: Heart },
   { label: "news", href: "/news", icon: NewspaperIcon },
   { label: "premium", href: "/premium", icon: PersonSimpleSwimIcon },
 ]
 
-const userMenuItems = [
-  { label: "Profile", href: "/profile", icon: User },
-  { label: "Settings", href: "/settings", icon: Settings },
-]
 
 type IUser = {
   id: string
@@ -95,6 +91,30 @@ function getInitials(name?: string) {
 export function Navbar({ user }: NavbarProps) {
   const pathname = usePathname()
   const router = useRouter()
+  const dashboardPath =
+  user?.data?.role === "ADMIN"
+    ? "/admin-dashboard"
+    : user?.data?.role === "LANDLORD"
+    ? "/author-dashboard"
+    : "/dashboard";
+
+const userMenuItems = [
+  {
+    label: "Profile",
+    href: "/profile",
+    icon: User,
+  },
+  {
+    label: "Settings",
+    href: "/settings",
+    icon: Settings,
+  },
+  {
+    label: "Dashboard",
+    href: dashboardPath,
+    icon: LayoutDashboard,
+  },
+];
   const [isLoggingOut, setIsLoggingOut] = useState(false)
 
  const handleLogout = async () => {
