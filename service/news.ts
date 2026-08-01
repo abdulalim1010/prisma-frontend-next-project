@@ -3,6 +3,37 @@ import { cookies } from "next/headers";
 const API = process.env.BACKEND_API_URL;
 
 
+
+export const getAllNews = async () => {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("accessToken")?.value;
+
+  const res = await fetch(`${API}/api/v1/news`, {
+    headers: {
+      Cookie: `accessToken=${token}`,
+    },
+    cache: "no-store",
+  });
+
+  return res.json();
+};
+
+
+export const getSingleNews = async (id:string) => {
+
+  const res = await fetch(
+    `${API}/api/v1/news/${id}`,
+    {
+      cache:"no-store",
+    }
+  );
+
+
+  return res.json();
+
+};
+
+
 export const getPublicNews = async () => {
 
   const res = await fetch(
