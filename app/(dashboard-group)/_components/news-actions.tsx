@@ -42,6 +42,29 @@ export default function NewsActions({
       router.refresh();
     }
   };
+  const handleDelete = async () => {
+  const ok = window.confirm(
+    "Are you sure you want to delete this news?"
+  );
+
+  if (!ok) return;
+
+  const res = await fetch(
+    `http://localhost:5000/api/v1/news/${item.id}`,
+    {
+      method: "DELETE",
+      credentials: "include",
+    }
+  );
+
+  const data = await res.json();
+
+  console.log(data);
+
+  if (res.ok) {
+    router.refresh();
+  }
+};
 
 return (
   <DropdownMenu>
@@ -75,12 +98,13 @@ return (
 
       </DropdownMenuItem>
 
-
-      <DropdownMenuItem className="text-red-500">
-        <Trash2 className="mr-2 h-4 w-4" />
-        Delete
-      </DropdownMenuItem>
-
+<DropdownMenuItem
+  onClick={handleDelete}
+  className="text-red-500"
+>
+  <Trash2 className="mr-2 h-4 w-4" />
+  Delete
+</DropdownMenuItem>
     </DropdownMenuContent>
 
   </DropdownMenu>

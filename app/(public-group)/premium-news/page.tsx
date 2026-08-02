@@ -1,6 +1,7 @@
 
 import { getPremiumNews } from "@/service/news";
 import PremiumNews from "../premium/PremiumNews";
+import SearchBar from "../_components/SearchBar";
 
 
 export default async function PremiumNewsPage(){
@@ -11,8 +12,14 @@ export default async function PremiumNewsPage(){
 
 
   return (
+    
+   <>
+   
+   <h1><SearchBar/></h1>
+   
     <PremiumNews 
       news={result.data}
     />
+   </>
   );
 }

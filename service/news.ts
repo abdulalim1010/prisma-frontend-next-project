@@ -34,15 +34,16 @@ export const getSingleNews = async (id:string) => {
 
 };
 
-
-export const getPublicNews = async () => {
-
+//search public news
+export const getPublicNews = async (
+  search = ""
+) => {
   const res = await fetch(
-    `${API}/api/v1/news/public`,
+    `${API}/api/v1/news/public?search=${encodeURIComponent(search)}`,
     {
-      next:{
-        revalidate:60,
-      }
+      cache: "no-store",
+      // অথবা চাইলে আগের revalidate ব্যবহার করতে পারো:
+      // next: { revalidate: 60 },
     }
   );
 
@@ -51,26 +52,23 @@ export const getPublicNews = async () => {
 
 
 
-export const getPremiumNews = async () => {
-
+export const getPremiumNews = async (
+  search = ""
+) => {
   const cookieStore = await cookies();
-
   const token = cookieStore.get("accessToken")?.value;
 
-
   const res = await fetch(
-    `${API}/api/v1/news/premium`,
+    `${API}/api/v1/news/premium?search=${encodeURIComponent(search)}`,
     {
-      headers:{
-        Cookie:`accessToken=${token}`,
+      headers: {
+        Cookie: `accessToken=${token}`,
       },
-      cache:"no-store",
+      cache: "no-store",
     }
   );
 
-
   return res.json();
-
 };
 //premium or not 
 

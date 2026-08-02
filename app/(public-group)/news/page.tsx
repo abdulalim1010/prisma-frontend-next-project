@@ -1,19 +1,27 @@
-
 import { getPublicNews } from "@/service/news";
 import PublicNews from "./PublicNews";
+import SearchBar from "../_components/SearchBar";
 
+export default async function NewsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{
+    search?: string;
+  }>;
+}) {
+  const { search } = await searchParams;
 
-
-
-export default async function NewsPage() {
-  const result = await getPublicNews();
+  const result = await getPublicNews(search);
 
   console.log("NEWS RESULT:", result);
 
   return (
     <div className="container mx-auto py-8">
-      <h1 className="mb-6 text-3xl font-bold">
+      <h1 className="text-3xl font-bold mb-6">
         Latest News
+      </h1>
+      <h1>
+        <SearchBar/>
       </h1>
 
       <PublicNews news={result.data} />
