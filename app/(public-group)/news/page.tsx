@@ -2,6 +2,7 @@ import { getPublicNews } from "@/service/news";
 import PublicNews from "./PublicNews";
 import SearchBar from "../_components/SearchBar";
 
+
 export default async function NewsPage({
   searchParams,
 }: {
@@ -21,7 +22,7 @@ export default async function NewsPage({
         Latest News
       </h1>
       <h1>
-        <SearchBar/>
+        <SearchBar path="/news" />
       </h1>
 
       <PublicNews news={result.data} />

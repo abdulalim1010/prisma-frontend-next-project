@@ -55,20 +55,25 @@ export const getPublicNews = async (
 export const getPremiumNews = async (
   search = ""
 ) => {
-  const cookieStore = await cookies();
-  const token = cookieStore.get("accessToken")?.value;
 
-  const res = await fetch(
-    `${API}/api/v1/news/premium?search=${encodeURIComponent(search)}`,
-    {
-      headers: {
-        Cookie: `accessToken=${token}`,
-      },
-      cache: "no-store",
-    }
-  );
+const cookieStore = await cookies();
 
-  return res.json();
+const token = cookieStore.get("accessToken")?.value;
+
+
+const res = await fetch(
+`${API}/api/v1/news/premium?search=${search}`,
+{
+headers:{
+Cookie:`accessToken=${token}`,
+},
+cache:"no-store",
+}
+);
+
+
+return res.json();
+
 };
 //premium or not 
 

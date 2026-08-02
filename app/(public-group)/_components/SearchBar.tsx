@@ -1,34 +1,75 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Search } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
-export default function SearchBar() {
+
+export default function SearchBar({
+  path,
+}: {
+  path: string;
+}) {
+
   const router = useRouter();
-  const [search, setSearch] = useState("");
+  const searchParams = useSearchParams();
 
-  const handleSubmit = (e: React.FormEvent) => {
+
+  const [search, setSearch] = useState(
+    searchParams.get("search") || ""
+  );
+
+
+  const handleSearch = (
+    e: React.FormEvent
+  ) => {
+
     e.preventDefault();
 
-    router.push(`/news?search=${encodeURIComponent(search)}`);
+
+    if(search.trim()){
+
+      router.push(
+        `${path}?search=${encodeURIComponent(search)}`
+      );
+
+    }else{
+
+      router.push(path);
+
+    }
+
   };
 
+
   return (
-    <form onSubmit={handleSubmit} className="flex gap-2">
-      <input
-        type="text"
+
+    <form
+      onSubmit={handleSearch}
+      className="flex gap-2"
+    >
+
+      <Input
         placeholder="Search news..."
         value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        className="border rounded-md px-3 py-2 w-72"
+        onChange={(e)=>
+          setSearch(e.target.value)
+        }
       />
 
-      <button
-        type="submit"
-        className="bg-black text-white px-4 rounded"
-      >
+
+      <Button type="submit">
+
+        <Search className="h-4 w-4 mr-2"/>
+
         Search
-      </button>
+
+      </Button>
+
+
     </form>
+
   );
 }
