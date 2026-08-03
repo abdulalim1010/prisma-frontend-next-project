@@ -2,7 +2,6 @@ import { getPublicNews } from "@/service/news";
 import PublicNews from "./PublicNews";
 import SearchBar from "../_components/SearchBar";
 
-
 export default async function NewsPage({
   searchParams,
 }: {
@@ -14,18 +13,34 @@ export default async function NewsPage({
 
   const result = await getPublicNews(search);
 
-  console.log("NEWS RESULT:", result);
-
   return (
     <div className="container mx-auto py-8">
-      <h1 className="text-3xl font-bold mb-6">
-        Latest News
-      </h1>
-      <h1>
-        <SearchBar path="/news" />
-      </h1>
+
+      {/* Header */}
+      <div className="mb-8 rounded-2xl border bg-card p-6 shadow-sm">
+
+        <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+
+          <div>
+            <h1 className="text-3xl font-bold tracking-tight">
+              Latest News
+            </h1>
+
+            <p className="mt-2 text-muted-foreground">
+              Browse the latest news and stay updated with current events.
+            </p>
+          </div>
+
+          <div className="w-full md:w-[420px]">
+            <SearchBar path="/news" />
+          </div>
+
+        </div>
+
+      </div>
 
       <PublicNews news={result.data} />
+
     </div>
   );
 }
